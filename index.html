@@ -3,83 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send LINE Notification</title>
-    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>My Shop</title>
 </head>
 <body>
-    <h1>LINE Login Example</h1>
-    <button id="loginButton">Login with LINE</button>
-    <div id="userInfo"></div>
-    <hr>
-    <h1>Send LINE Notification</h1>
-    <button id="sendNotification">Send Notification</button>
-
-    <script>
-        window.onload = function() {
-            liff.init()
-            // liff.init({ liffId: 'YOUR_LIFF_ID' })
-            .then(() => {
-                // Check if user is logged in
-                if (!liff.isLoggedIn()) {
-                    // Display login button if not logged in
-                    $('#loginButton').show();
-                } else {
-                    // If user is logged in, retrieve user ID and display user info
-                    getUserInfo();
-                }
-            })
-            .catch((err) => {
-                console.error('LINE initialization failed', err);
-            });
-        };
-
-        // Login with LINE
-        $('#loginButton').click(function() {
-            liff.login();
-        });
-
-        // Get user info including user ID
-        function getUserInfo() {
-            liff.getProfile()
-            .then((profile) => {
-                const userId = profile.userId;
-                $('#userInfo').html('Logged in as: ' + profile.displayName + ' (ID: ' + userId + ')');
-            })
-            .catch((err) => {
-                console.error('Error getting user profile', err);
-            });
-        }
-        $(document).ready(function(){
-            $("#sendNotification").click(function(){
-                var message = "Hello, this is a test notification from my web app!";
-
-                // Send request to LINE Messaging API
-                $.ajax({
-                    url: 'https://api.line.me/v2/bot/message/multicast',
-                    headers: {
-                        'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
-                        'Content-Type': 'application/json'
-                    },
-                    method: 'POST',
-                    data: JSON.stringify({
-                        to: ['LINE_USER_ID'], // Replace with your LINE user ID
-                        messages: [{
-                            type: 'text',
-                            text: message
-                        }]
-                    }),
-                    success: function(response) {
-                        console.log(response);
-                        alert("Notification sent successfully!");
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                        alert("Failed to send notification. Check console for details.");
-                    }
-                });
-            });
-        });
-    </script>
+    <iframe src="https://shopme.dmcr.go.th/my-shop-dev" frameborder="0" style="width:100%;height:100vh"></iframe>
 </body>
 </html>
